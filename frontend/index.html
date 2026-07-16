@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clara's Archive</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CRT scanline + vignette overlay -->
+    <div class="crt-overlay" aria-hidden="true"></div>
+
+    <!-- Sound Control -->
+    <button id="sound-toggle" class="sound-btn" aria-label="Alternar som">
+        <svg class="sound-icon-on" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor"
+                d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+        </svg>
+        <svg class="sound-icon-off hidden" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor"
+                d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.5C15.58,18 14.83,18.4 14,18.71V20.77C15.38,20.44 16.63,19.78 17.7,18.9L20.73,21.93L22,20.66L4.27,3M14,3.23V5.29C14.73,5.5 15.43,5.83 16.07,6.26L14.59,7.74C14.41,7.65 14.21,7.58 14,7.54V9.54L19,14.54C19,13.7 19,12.85 19,12C19,7.72 16,4.14 14,3.23M16.5,12C16.5,11.2 16.1,10.5 15.5,10.05L14,11.55V12.45L15.46,13.9C15.48,13.28 16.5,12.62 16.5,12Z" />
+        </svg>
+    </button>
+
+    <!-- Navigation Arrows -->
+    <button id="btn-prev" class="nav-btn nav-btn-left" aria-label="Página Anterior">
+        <svg viewBox="0 0 24 24" width="36" height="36">
+            <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+        </svg>
+    </button>
+    <button id="btn-next" class="nav-btn nav-btn-right" aria-label="Próxima Página">
+        <svg viewBox="0 0 24 24" width="36" height="36">
+            <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+        </svg>
+    </button>
+
+    <!-- Album Container -->
+    <div class="album-viewport" id="album-viewport">
+        <div class="flip-book" id="book">
+
+            <!-- PAGINA 0: CAPA -->
+            <div class="page page-cover" data-density="hard">
+                <div class="page-content cover-content">
+                    <div class="cover-header">
+                        <span class="cover-seal">&gt;&gt;&gt; ÁLBUM DE FIGURINHAS &lt;&lt;&lt;</span>
+                    </div>
+                    <div class="cover-body">
+                        <h1 class="cover-title crt-title">CLARA'S</h1>
+                        <h2 class="cover-subtitle crt-title">ARCHIVE</h2>
+                        <div class="cover-art">
+                            <div class="art-grid"></div>
+
+                            <!-- Floating Mini Cards Silhouette Collage -->
+                            <div class="mini-card cowboy-bebop">
+                                <div class="mc-avatar">CB</div>
+                                <span class="mc-num">#01</span>
+                            </div>
+                            <div class="mini-card floral-green">
+                                <div class="mc-avatar">FG</div>
+                                <span class="mc-num">#11</span>
+                            </div>
+                            <div class="mini-card maus">
+                                <div class="mc-avatar">MA</div>
+                                <span class="mc-num">#16</span>
+                            </div>
+
+                            <!-- Central Glowing 3D Tech Sphere -->
+                            <div class="sphere-core">
+                                <pre class="ascii-skull" aria-label="caveira em ASCII">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⣿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣈⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣴⣤⡀⠀⠀⠀⠀⣭⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⡀⠈⠳⣄⠀⠀⠼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢠⠀⠀⠀⢳⠀⠀⠈⠢⡀⠶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠉⢻⠉⢀⠀⠀⢣⠀⠀⠀⠈⢼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠺⠃⠀⠀⠡⠀⠀⠀⣸⠐⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠱⡀⠀⣿⡀⢈⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣀⣹⣾⣿⣷⣏⣀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠉⠉⠉⠉⠙⠛⢻⣿⣶⣿⡟⠛⠋⠉⠉⠉⠉⠁⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠞⠹⣿⢏⠳⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠢⠀⠀⠀⠰⡧⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⡀⢸⠀⠀⠡⡀⠀⠀⠀⠤⣾⠤
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢬⠀⠀⠀⠱⡀⠀⠀⠀⠘⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⠀⠀⢣⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠶⠀⠀⠓⢤⣀⡇⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠶⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣛⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢩⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣤⣿⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
+                            </div>
+                        </div>
+                        <p class="cover-footer-text">SAVE FILE 19<span class="blink-cursor">▊</span></p>
+                    </div>
+                    <div class="cover-footer">
+                        <span>2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGINA 1: TV -->
+            <div class="page page-left">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-animes">me@clara:~$ cd /video</span>
+                        <h3 class="page-title">TV</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#01</div>
+                            <div class="slot-name">Cowboy Bebop</div>
+                            <div class="slot-role">See you space cowboy...</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#02</div>
+                            <div class="slot-name">Dorohedoro</div>
+                            <div class="slot-role">What did the man in my mouth say?</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#03</div>
+                            <div class="slot-name">Sociedade dos Poetas Mortos</div>
+                            <div class="slot-role">Only in their dreams can men be truly free. 'Twas always thus, and always thus will be</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#04</div>
+                            <div class="slot-name">Lain</div>
+                            <div class="slot-role">No matter where you go, everybody's connected</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#05</div>
+                            <div class="slot-name">Friends</div>
+                            <div class="slot-role">The One With...</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 1/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 2: JOGOS -->
+            <div class="page page-right">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-jogos">me@clara:~$ cd /bin</span>
+                        <h3 class="page-title">Jogos</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#06</div>
+                            <div class="slot-name">Tibia</div>
+                            <div class="slot-role">Utani Hur</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#07</div>
+                            <div class="slot-name">Need for Speed: Underground 2</div>
+                            <div class="slot-role">Hey, it's Rachel...</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#08</div>
+                            <div class="slot-name">Stardew Valley</div>
+                            <div class="slot-role">The spirits are very happy today!</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#09</div>
+                            <div class="slot-name">Club Penguin</div>
+                            <div class="slot-role">Vire o Iceberg</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#10</div>
+                            <div class="slot-name">Pokémon FireRed</div>
+                            <div class="slot-role">Wild Psyduck appeared!</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 2/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 3: ALBUNS MUSICAIS -->
+            <div class="page page-left">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-albuns">me@clara:~$ cd /audio</span>
+                        <h3 class="page-title">Álbuns Musicais</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#11</div>
+                            <div class="slot-name">Floral Green - Title Fight</div>
+                            <div class="slot-role">Glued my green eyes to your face</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#12</div>
+                            <div class="slot-name">Arthur Verocai - Arthur Verocai</div>
+                            <div class="slot-role">Se nada vai bem ou vai mal, que mapa estão os meus pés?</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#13</div>
+                            <div class="slot-name">IGOR - Tyler, The Creator</div>
+                            <div class="slot-role">Exactly what you run from, you end up chasing</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#14</div>
+                            <div class="slot-name">MM..FOOD - MF DOOM</div>
+                            <div class="slot-role">We need food!</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#15</div>
+                            <div class="slot-name">I Let It In And It Took Everything - Loathe</div>
+                            <div class="slot-role">It's all in the way you look at me. A two-way mirror</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 3/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 4: LIVROS -->
+            <div class="page page-right">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-livros">me@clara:~$ cd /docs</span>
+                        <h3 class="page-title">Livros</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#16</div>
+                            <div class="slot-name">Maus - Art Spiegelman</div>
+                            <div class="slot-role">These papers had too many memories, so I burned them</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#17</div>
+                            <div class="slot-name">A Menina do Outro Lado - Nagabe</div>
+                            <div class="slot-role">The tea is ready. Let's forget about the world for a little while</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#18</div>
+                            <div class="slot-name">Modernidade Líquida - Zygmunt Bauman</div>
+                            <div class="slot-role">In a liquid modern life there are no permanent bonds</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#19</div>
+                            <div class="slot-name">Meu Ano de Descanso e Relaxamento - Ottessa Moshfegh</div>
+                            <div class="slot-role">My hibernation was self-preservational</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#20</div>
+                            <div class="slot-name">Matéria Escura - Blake Crouch</div>
+                            <div class="slot-role">Are you happy with your life?</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 4/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 5: INVENTARIO -->
+            <div class="page page-left">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-inventario">me@clara:~$ cd /assets</span>
+                        <h3 class="page-title">Inventário</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#21</div>
+                            <div class="slot-name">Stratocaster Giannini G-101</div>
+                            <div class="slot-role">Equipamento: reduz a paz da vizinhança em um raio de 50 metros</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#22</div>
+                            <div class="slot-name">Thinkpad T480</div>
+                            <div class="slot-role">Item Raro: construído para sobreviver ao caos acadêmico</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#23</div>
+                            <div class="slot-name">PSP 1000</div>
+                            <div class="slot-role">Relíquia: torna qualquer espera mais curta</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#24</div>
+                            <div class="slot-name">Edifier W800BT Plus</div>
+                            <div class="slot-role">Equipamento: essencial para missões de longa duração</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#25</div>
+                            <div class="slot-name">Qualquer livro da Agatha Christie</div>
+                            <div class="slot-role">Consumível infinito: cada leitura concede um novo suspeito</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 5/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 6: ANIMAIS -->
+            <div class="page page-right">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="badge badge-animais">me@clara:~$ cd /entities</span>
+                        <h3 class="page-title">Animais</h3>
+                    </div>
+                    <div class="stickers-grid">
+                        <div class="sticker-slot">
+                            <div class="slot-number">#26</div>
+                            <div class="slot-name">Xanim</div>
+                            <div class="slot-role">Companheira: converte qualquer superfície em cama</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#27</div>
+                            <div class="slot-name">Pietrovisk</div>
+                            <div class="slot-role">Especialista: persegue bolinhas com dedicação absoluta</div>
+                        </div>
+                        <div class="sticker-slot special-slot">
+                            <div class="slot-number">#28</div>
+                            <div class="slot-name">Dogo Bartolo Zika</div>
+                            <div class="slot-role">Companheiro Lendário: tanque de pequeno porte</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#29</div>
+                            <div class="slot-name">Loro José</div>
+                            <div class="slot-role">Mensageiro: "quer café, loro?" era seu feitiço favorito</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="slot-number">#30</div>
+                            <div class="slot-name">Gatos Urbanos</div>
+                            <div class="slot-role">Criaturas Selvagens: impossível passar por um sem dizer "pspsps"</div>
+                        </div>
+                    </div>
+                    <div class="page-footer">[ pág. 6/6 :: OK ]</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 7: CONTRACAPA -->
+            <div class="page page-cover-back" data-density="hard">
+                <div class="page-content cover-back-content">
+                    <div class="cover-back-header">
+                        <h2>CLARA'S ARCHIVE</h2>
+                    </div>
+                    <div class="cover-back-body">
+                        <div class="tech-logo-collage">
+                            [ TV ] :: [ JOGOS ] :: [ ALBÚNS MUSICAIS ] :: [ LIVROS ] :: [ INVENTÁRIO ] :: [ ANIMAIS ]
+                        </div>
+                        <p class="summary-text">
+                            Registro de progresso da personagem "Clara". Contém equipamentos, companheiros, histórias e artefatos adquiridos ao longo da jornada.
+                        </p>
+                        <div class="barcode-container">
+                            <div class="barcode">
+                                <!-- Simulated barcode lines -->
+                                <div class="bar"></div>
+                                <div class="bar thin"></div>
+                                <div class="bar"></div>
+                                <div class="bar thick"></div>
+                                <div class="bar thin"></div>
+                                <div class="bar"></div>
+                                <div class="bar thick"></div>
+                                <div class="bar"></div>
+                                <div class="bar thin"></div>
+                                <div class="bar thick"></div>
+                            </div>
+                            <span class="barcode-number">9 788575 228494</span>
+                        </div>
+                    </div>
+                    <div class="cover-back-footer">
+                        <span>Imersão Julho • Alura • 2026</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Page Flip Library -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    <!-- Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>
