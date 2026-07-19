@@ -18,10 +18,10 @@
 
 <body>
 
-    <!-- CRT scanline + vignette overlay -->
+    <!-- CRT scanline + vinheta -->
     <div class="crt-overlay" aria-hidden="true"></div>
 
-    <!-- Sound Control -->
+    <!-- Controle de Som -->
     <button id="sound-toggle" class="sound-btn" aria-label="Alternar som">
         <svg class="sound-icon-on" viewBox="0 0 24 24" width="24" height="24">
             <path fill="currentColor"
@@ -33,7 +33,7 @@
         </svg>
     </button>
 
-    <!-- Navigation Arrows -->
+    <!-- Setas de Navegação -->
     <button id="btn-prev" class="nav-btn nav-btn-left" aria-label="Página Anterior">
         <svg viewBox="0 0 24 24" width="36" height="36">
             <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
@@ -61,7 +61,7 @@
                         <div class="cover-art">
                             <div class="art-grid"></div>
 
-                            <!-- Floating Mini Cards Silhouette Collage -->
+                            <!-- Mini Cards Flutuantes -->
                             <div class="mini-card cowboy-bebop">
                                 <div class="mc-avatar">CB</div>
                                 <span class="mc-num">#01</span>
@@ -75,9 +75,8 @@
                                 <span class="mc-num">#16</span>
                             </div>
 
-                            <!-- Central Glowing 3D Tech Sphere -->
-                            <div class="sphere-core">
-                                <pre class="ascii-skull" aria-label="caveira em ASCII">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                            <!-- Estrela ASCII -->
+                            <pre class="ascii-star" aria-label="estrela em ASCII">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⣿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣈⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -101,7 +100,7 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢩⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣤⣿⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
-                            </div>
+
                         </div>
                         <p class="cover-footer-text">SAVE FILE 19<span class="blink-cursor">▊</span></p>
                     </div>
@@ -354,7 +353,7 @@
                         </p>
                         <div class="barcode-container">
                             <div class="barcode">
-                                <!-- Simulated barcode lines -->
+                                <!-- Código de Barras -->
                                 <div class="bar"></div>
                                 <div class="bar thin"></div>
                                 <div class="bar"></div>
@@ -380,7 +379,7 @@
 
     <!-- Page Flip Library -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
-    <!-- Logic -->
+
     <script src="app.js"></script>
 </body>
 
