@@ -1,9 +1,3 @@
-/* ===================================================
-   CLARA'S ARCHIVE — TERMINAL / CRT PHOSPHOR THEME
-   Paleta: preto quase-puro + verde fósforo, bordas
-   tracejadas, glow de tubo CRT, tipografia de terminal.
-   =================================================== */
-
 :root {
   /* Base */
   --color-void: #04070533;
@@ -11,17 +5,17 @@
   --color-bg-panel: #0a120a;
   --color-bg-panel-2: #0d160d;
 
-  /* Phosphor greens */
+  /* Phosphor greens CRT */
   --color-green-bright: #55ff8f;
   --color-green: #3ef073;
   --color-green-mid: #26c25a;
   --color-green-dim: #175c30;
   --color-green-faint: #0e2f19;
 
-  /* Accent (used sparingly for "special" items) */
+  /* Destaque de figurinhas centrais */
   --color-amber: #ffcf6b;
 
-  /* Text */
+  /* Texto */
   --color-text: #d7ffe2;
   --color-text-muted: #6fa682;
   --color-text-dim: #4a7a5c;
@@ -57,7 +51,7 @@ body {
 
 /* ===================================================
    CRT OVERLAY — scanlines + vignette, aplicado sobre
-   toda a viewport para reforçar a leitura de "monitor".
+   toda a viewport
    =================================================== */
 .crt-overlay {
   position: fixed;
@@ -87,7 +81,7 @@ body {
   50%, 100% { opacity: 0; }
 }
 
-/* Sound & Control UI */
+/* UI - Som e controle */
 .sound-btn {
   position: absolute;
   top: 20px;
@@ -117,7 +111,7 @@ body {
   display: none !important;
 }
 
-/* Navigation UI */
+/* UI - Navegação */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -154,7 +148,7 @@ body {
   right: 30px;
 }
 
-/* Album Layout Container */
+/* Container de layout do álbum */
 .album-viewport {
   position: relative;
   width: 1100px;
@@ -170,10 +164,10 @@ body {
   border-radius: 4px;
   overflow: hidden;
   background-color: transparent;
-  display: none; /* Shown after initialization */
+  display: none;
 }
 
-/* Individual Pages */
+/* Páginas individuais */
 .page {
   width: 550px;
   height: 800px;
@@ -183,18 +177,17 @@ body {
     linear-gradient(90deg, rgba(62, 240, 115, 0.035) 1px, transparent 1px);
   background-size: 24px 24px;
   overflow: hidden;
-  cursor: grab; /* Mão aberta indicando que a página pode ser "agarrada" */
-  user-select: none; /* Impede seleção de texto ao arrastar a página */
+  cursor: grab;
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
 
 .page:active {
-  cursor: grabbing; /* Mão fechada durante o clique na página */
+  cursor: grabbing;
 }
 
-/* Global dragging cursor override */
 body.dragging,
 body.dragging * {
   cursor: grabbing !important;
@@ -211,7 +204,6 @@ body.dragging * {
   position: relative;
 }
 
-/* Page Lombada Crease Shadows */
 .page:nth-child(even):not(:last-child) .page-content::after {
   content: '';
   position: absolute;
@@ -236,7 +228,7 @@ body.dragging * {
   z-index: 10;
 }
 
-/* Page Header & Badge */
+/* Header da página e badge */
 .page-header {
   margin-bottom: 25px;
   display: flex;
@@ -282,7 +274,7 @@ body.dragging * {
   color: var(--color-green-dim);
 }
 
-/* Stickers Grid Layout */
+/* Layout da área das figurinhas*/
 .stickers-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -291,7 +283,7 @@ body.dragging * {
   flex: 1;
 }
 
-/* Individual Sticker Slots */
+/* Slots individuais das figurinhas */
 .sticker-slot {
   background-color: rgba(62, 240, 115, 0.02);
   border: 1px dashed var(--color-green-dim);
@@ -372,10 +364,8 @@ body.dragging * {
 }
 
 /* ===================================================
-   FIGURINHAS PREENCHIDAS (adicionado no Dia 3)
-   Estilos para as imagens inseridas via JavaScript
+   FIGURINHAS PREENCHIDAS
    =================================================== */
-
 .sticker-img {
   position: absolute;
   inset: 0;
@@ -401,6 +391,23 @@ body.dragging * {
   display: none;
 }
 
+/* Overlay de sombra: cobre o slot inteiro */
+.sticker-slot:has(.sticker-img)::before,
+.sticker-slot.slot-preenchido::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(2, 8, 3, 0.92) 0%,
+    rgba(2, 8, 3, 0.65) 25%,
+    rgba(2, 8, 3, 0.25) 45%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
 /* Nome como overlay centralizado na base da imagem */
 .sticker-slot:has(.sticker-img) .slot-name {
   position: absolute;
@@ -420,7 +427,7 @@ body.dragging * {
   pointer-events: none;
 }
 
-/* Animação de "colar" a figurinha */
+/* Animação ao colar a figurinha */
 @keyframes sticker-aparecer {
   from {
     opacity: 0;
@@ -432,7 +439,7 @@ body.dragging * {
   }
 }
 
-/* Slot quando a figurinha está colada (imagem carregou com sucesso) */
+/* Slot quando a figurinha está colada */
 .slot-preenchido {
   border-style: solid !important;
   border-color: var(--color-green) !important;
@@ -443,7 +450,7 @@ body.dragging * {
   box-shadow: 0 0 18px rgba(62, 240, 115, 0.35) !important;
 }
 
-/* Page Footer */
+/* Rodapé */
 .page-footer {
   margin-top: 15px;
   font-size: 0.78rem;
@@ -455,7 +462,9 @@ body.dragging * {
   letter-spacing: 0.5px;
 }
 
-/* CAPA (Cover) CSS */
+/* ===================================================
+   CAPA
+   =================================================== */
 .page-cover {
   background-color: #05080533;
   background-image:
@@ -514,9 +523,7 @@ body.dragging * {
   gap: 10px;
 }
 
-/* CRT Flicker Typography Effect
-   Simula a instabilidade de brilho de um tubo CRT antigo em vez de
-   um glitch de sinal (sem RGB-split, sem "corte" de linhas). */
+/* Efeito CRT*/
 .crt-title {
   position: relative;
   color: var(--color-green-bright);
@@ -584,7 +591,7 @@ body.dragging * {
     linear-gradient(to bottom, rgba(62, 240, 115, 0.06) 1px, transparent 1px);
 }
 
-/* Floating Mini Cards Collage */
+/* Mini cards flutuantes */
 .mini-card {
   position: absolute;
   width: 50px;
@@ -667,17 +674,8 @@ body.dragging * {
   50% { transform: rotate(18deg) translateY(-5px); }
 }
 
-/* Central Glowing 3D Tech Sphere */
-.sphere-core {
-  width: 96px;
-  height: 96px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-
-.ascii-skull {
+/* Estela ASCII */
+.ascii-star {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   line-height: 1.15;
@@ -686,10 +684,10 @@ body.dragging * {
   text-shadow: var(--glow-sm);
   white-space: pre;
   text-align: center;
-  animation: skullPulse 4s infinite ease-in-out;
+  animation: starPulse 4s infinite ease-in-out;
 }
 
-@keyframes skullPulse {
+@keyframes starPulse {
   0%, 100% {
     transform: scale(1);
   }
@@ -714,7 +712,9 @@ body.dragging * {
   opacity: 0.8;
 }
 
-/* CREDITS PAGE CSS */
+/* ===================================================
+   PÁGINA DE CRÉDITOS
+   =================================================== */
 .credits-content {
   background-color: var(--color-bg-panel);
 }
@@ -774,7 +774,9 @@ body.dragging * {
   margin-top: 15px;
 }
 
-/* CONTRACAPA (Back Cover) CSS */
+/* ===================================================
+   CONTRACAPA
+   =================================================== */
 .page-cover-back {
   background-color: #05080533;
   background-image:
@@ -868,7 +870,7 @@ body.dragging * {
   color: var(--color-text-dim);
 }
 
-/* Responsiveness & Mobile Adaptations */
+/* MOBILE: Adaptações e responsividade */
 @media (max-width: 1200px) {
   .album-viewport {
     width: 900px;
@@ -933,7 +935,7 @@ body.dragging * {
 }
 
 @media (max-width: 768px) {
-  /* In portrait/mobile mode, StPageFlip will show single pages */
+  /* Em modo mobile, o StPageFlip mostrará páginas únicas */
   .album-viewport {
     width: 100%;
     max-width: 480px;
