@@ -51,7 +51,7 @@ async function preencherFigurinhas() {
 
     } catch (erro) {
         console.warn("⚠️  Não foi possível conectar à API do backend:", erro.message);
-        console.info("ℹ️  Inicie o servidor: cd backend/dia-3 && uvicorn main:app --reload");
+        console.info("ℹ️  Inicie o servidor: cd backend && uvicorn main:app --reload");
     }
 }
 
