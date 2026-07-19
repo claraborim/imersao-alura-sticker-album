@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 document.body.classList.add("dragging");
                 pageFlip.startUserTouch({ x: cornerX, y: cornerY });
+                playPaperTurnSound();
             }
             
             if (dragStarted) {
